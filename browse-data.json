@@ -1,0 +1,209 @@
+{
+  "browseByMlsArea": [
+    {
+      "title": "Albuquerque East",
+      "pdfUrl": "https://raw.githubusercontent.com/tjsiem09/SWMLSAreas/cc1b02f185e9eb6da759ac79a3704829e00d0f14/ABQEastSWMLS(final3).pdf",
+      "areas": [
+        { "id": 10, "name": "Sandia Heights", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506022648739952000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506022851071436000000/listings" },
+        { "id": 20, "name": "North Albuquerque Acres", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506023544881748000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506023304457680000000/listings" },
+        { "id": 21, "name": "Albuquerque Acres West", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506023712257497000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506023846946208000000/listings" },
+        { "id": 30, "name": "Far Northeast Heights", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506024215525891000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506024046382066000000/listings" },
+        { "id": 31, "name": "Foothills North", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506024432828264000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506024728364811000000/listings" },
+        { "id": 32, "name": "Academy West", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506024903746413000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506025012886028000000/listings" },
+        { "id": 40, "name": "UNM", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506025141622964000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506025245734208000000/listings" },
+        { "id": 41, "name": "Uptown", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506025404528351000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506025558117635000000/listings" },
+        { "id": 42, "name": "UNM South", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506025717660081000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506025817897612000000/listings" },
+        { "id": 50, "name": "Northeast Heights", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506025936437141000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506030121124024000000/listings" },
+        { "id": 51, "name": "Foothills South", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506030343791631000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506030505689816000000/listings" },
+        { "id": 60, "name": "Four Hills Village", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506030645366719000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506030801429727000000/listings" },
+        { "id": 70, "name": "Fairgrounds", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506031723850200000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250219020919139816000000/listings" },
+        { "id": 71, "name": "Southeast Heights", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506032322627075000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506032443376131000000/listings" },
+        { "id": 72, "name": "Mesa Del Sol", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506033648873195000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506033758530735000000/listings" }
+      ],
+      "priceRanges": [
+        { "label": "View All", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726153845221718000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726154306977431000000/listings" },
+        { "label": "$0-$199k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908005212301925000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908150401519679000000/listings" },
+        { "label": "$200k-$299k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908153651725223000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908153903290174000000/listings" },
+        { "label": "$300k-$399k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908155139625949000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908155459764144000000/listings" },
+        { "label": "$400k-$499k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161120003176000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161215750503000000/listings" },
+        { "label": "$500k-$699k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908162820289745000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908162724447574000000/listings" },
+        { "label": "$700k-$999k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163709825522000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163800112811000000/listings" },
+        { "label": "$1M+", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164737712957000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164632814191000000/listings" }
+      ]
+    },
+    {
+      "title": "Albuquerque West",
+      "pdfUrl": "https://raw.githubusercontent.com/tjsiem09/SWMLSAreas/cc1b02f185e9eb6da759ac79a3704829e00d0f14/ABQWestSWMLS(final3).pdf",
+      "areas": [
+        { "id": 80, "name": "Downtown Area", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506033916613586000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506034145548410000000/listings" },
+        { "id": 90, "name": "Near South Valley", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506034337272182000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506034442291523000000/listings" },
+        { "id": 91, "name": "Valley Farms", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506034653250492000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506034757812100000000/listings" },
+        { "id": 92, "name": "Southwest Heights", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506034927591268000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506035122856530000000/listings" },
+        { "id": 93, "name": "Pajarito", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506035320777682000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506035452168519000000/listings" },
+        { "id": 100, "name": "North Valley", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506035621495674000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506035805637797000000/listings" },
+        { "id": 101, "name": "Near North Valley", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506035925180854000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506040047896549000000/listings" },
+        { "id": 102, "name": "Far North Valley", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506040306398701000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506040421777320000000/listings" },
+        { "id": 103, "name": "West River Valley", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506040615964752000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506040744659236000000/listings" },
+        { "id": 110, "name": "Northwest Heights", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506040914326551000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506041030219719000000/listings" },
+        { "id": 111, "name": "Ladera Heights", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506041146578805000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506041424111020000000/listings" },
+        { "id": 112, "name": "Far West Mesa", "activeUrl": null, "soldUrl": null },
+        { "id": 120, "name": "Paradise West", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506131718400092000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506131819256155000000/listings" },
+        { "id": 121, "name": "Paradise East", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506131931574796000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506132045585427000000/listings" }
+      ],
+      "priceRanges": [
+        { "label": "View All", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726154748695029000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726155515638302000000/listings" },
+        { "label": "$0-$199k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908151458861565000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908151242109653000000/listings" },
+        { "label": "$200k-$299k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908154217384009000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908154125191059000000/listings" },
+        { "label": "$300k-$399k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908155953067878000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908160227266953000000/listings" },
+        { "label": "$400k-$499k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161410927718000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161320677505000000/listings" },
+        { "label": "$500k-$699k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908162928113611000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163019395097000000/listings" },
+        { "label": "$700k-$999k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163937527885000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163857398940000000/listings" },
+        { "label": "$1M+", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164902675931000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164957576475000000/listings" }
+      ]
+    },
+    {
+      "title": "Rio Rancho & Southern Sandoval County",
+      "pdfUrl": "https://raw.githubusercontent.com/tjsiem09/SWMLSAreas/cc1b02f185e9eb6da759ac79a3704829e00d0f14/RioRanchoSWMLSAreas(final2).pdf",
+      "areas": [
+        { "id": 130, "name": "Corrales", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506132138171162000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506132235113681000000/listings" },
+        { "id": 140, "name": "Rio Rancho South", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506132343148155000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506132431681588000000/listings" },
+        { "id": 141, "name": "Rio Rancho Southwest", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506132533254138000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506132913316277000000/listings" },
+        { "id": 150, "name": "Rio Rancho Mid", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506133025328067000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506133113964894000000/listings" },
+        { "id": 151, "name": "Rio Rancho Mid-North", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506133233933002000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506133328721226000000/listings" },
+        { "id": 152, "name": "Rio Rancho Mid-West", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506133500094330000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506133602987606000000/listings" },
+        { "id": 160, "name": "Rio Rancho North", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506133722531351000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506133816649678000000/listings" },
+        { "id": 161, "name": "Rio Rancho Central", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506133922866557000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506134035304728000000/listings" },
+        { "id": 162, "name": "Rio Rancho Northwest", "activeUrl": null, "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506134348978767000000/listings" },
+        { "id": 170, "name": "Bernalillo/Algodones", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506134518846960000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506134615190200000000/listings" },
+        { "id": 180, "name": "Placitas Area", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506134719325663000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506134819390635000000/listings" }
+      ],
+      "priceRanges": [
+        { "label": "View All", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726160415167380000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726160209623134000000/listings" },
+        { "label": "$0-$199k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908151628579396000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908151808131588000000/listings" },
+        { "label": "$200k-$299k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908154430855987000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908154536105098000000/listings" },
+        { "label": "$300k-$399k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908160526523326000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908160338488564000000/listings" },
+        { "label": "$400k-$499k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161504168500000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161557955257000000/listings" },
+        { "label": "$500k-$699k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163209829984000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163119993249000000/listings" },
+        { "label": "$700k-$999k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164041863093000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164131858583000000/listings" },
+        { "label": "$1M+", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908165143819529000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908165059953232000000/listings" }
+      ]
+    },
+    {
+      "title": "East Mountain Area & Estancia Basin",
+      "pdfUrl": "https://raw.githubusercontent.com/tjsiem09/SWMLSAreas/cc1b02f185e9eb6da759ac79a3704829e00d0f14/EastMountainsSWMLS(final2).pdf",
+      "areas": [
+        { "id": 210, "name": "Carnuel/Monticello", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506135710871337000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506135838233100000000/listings"},
+        { "id": 220, "name": "North of I-40", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506140011705543000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506140114354359000000/listings"},
+        { "id": 230, "name": "South of I-40", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506140222660821000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506140317505384000000/listings"},
+        { "id": 231, "name": "Manzano Mountain", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506140425066206000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506140524396370000000/listings"},
+        { "id": 240, "name": "Zuzax/Tijeras", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506140641629518000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506140738639727000000/listings"},
+        { "id": 250, "name": "NW Edgewood", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506140851359570000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506141055764375000000/listings"},
+        { "id": 260, "name": "South 217", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506141222528142000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506141325401613000000/listings"},
+        { "id": 270, "name": "NE Edgewood", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506141433394603000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506141533078598000000/listings"},
+        { "id": 271, "name": "Stanley", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506141645633831000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506141809651228000000/listings"},
+        { "id": 280, "name": "SE Edgewood", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506141959390259000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506142100487021000000/listings"},
+        { "id": 290, "name": "North Moriarty", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506142206671191000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506142310927626000000/listings"},
+        { "id": 291, "name": "South Moriarty", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506142445385675000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506142537079882000000/listings"},
+        { "id": 292, "name": "Estancia/McIntosh", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506142656338845000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506142815730856000000/listings"},
+        { "id": 293, "name": "Mountainair", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506142929109406000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506143027632284000000/listings"}
+      ],
+      "priceRanges": [
+        { "label": "View All", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726160752472207000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726161036732476000000/listings" },
+        { "label": "$0-$199k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908152058699525000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908151955964592000000/listings" },
+        { "label": "$200k-$299k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908154752876403000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908154702240324000000/listings" },
+        { "label": "$300k-$399k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908160649763313000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908160746518042000000/listings" },
+        { "label": "$400k-$499k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161803105058000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161713224859000000/listings" },
+        { "label": "$500k-$699k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163300140405000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163345366972000000/listings" },
+        { "label": "$700k-$999k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164310367842000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164227554709000000/listings" },
+        { "label": "$1M+", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908165253141946000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908165346999327000000/listings" }
+      ]
+    },
+    {
+      "title": "Valencia County",
+      "pdfUrl": "https://raw.githubusercontent.com/tjsiem09/SWMLSAreas/cc1b02f185e9eb6da759ac79a3704829e00d0f14/ValenciaCountySWMLSAreas(final2).pdf",
+      "areas": [
+        { "id": 690, "name": "West Valencia County", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506155324393445000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506155436414279000000/listings" },
+        { "id": 700, "name": "Los Lunas", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506155513704894000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506155619819404000000/listings" },
+        { "id": 701, "name": "West Los Lunas", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506155737314337000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506155843535540000000/listings" },
+        { "id": 710, "name": "Bosque Farms/Peralta", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506160002456199000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506160104178839000000/listings" },
+        { "id": 711, "name": "East Los Lunas/Tome", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506160245954394000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506160342888568000000/listings" },
+        { "id": 720, "name": "Meadowlake/El Cerro", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506160522369874000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506160633535741000000/listings" },
+        { "id": 721, "name": "Las Maravillas", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506160803809544000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506160923243416000000/listings" },
+        { "id": 730, "name": "West Belen", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506161306908901000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506161427254262000000/listings" },
+        { "id": 740, "name": "Los Chavez", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506161559173815000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506161709501993000000/listings" },
+        { "id": 741, "name": "Belen", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506161830021719000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506161936228504000000/listings" },
+        { "id": 742, "name": "Jarales/Bosque", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506162052014579000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506162151227401000000/listings" },
+        { "id": 750, "name": "Adelino", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506162400001345000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506162608983352000000/listings" },
+        { "id": 760, "name": "Rio Communities/Tierra Grande", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506162757259353000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250506162942962043000000/listings" }
+      ],
+      "priceRanges": [
+        { "label": "View All", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726161622191506000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250726161503236672000000/listings" },
+        { "label": "$0-$199k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908152228321237000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908152329687488000000/listings" },
+        { "label": "$200k-$299k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908153533689504000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908152601410423000000/listings" },
+        { "label": "$300k-$399k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908160948255851000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908160857505209000000/listings" },
+        { "label": "$400k-$499k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161859574759000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908161959286545000000/listings" },
+        { "label": "$500k-$699k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163537010103000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908163446399874000000/listings" },
+        { "label": "$700k-$999k", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164400914130000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908164453045249000000/listings" },
+        { "label": "$1M+", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908165704549986000000/listings", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250908165509278796000000/listings" }
+      ]
+    }
+  ],
+  "browseByZip": [
+    {
+      "title": "Bernalillo County",
+      "zips": [
+        { "id": "87008", "name": "Cedar Crest", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222005517590942000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221203242286787000000/listings" },
+        { "id": "87047", "name": "Sandia Park", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222011206065786000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221204019824047000000/listings" },
+        { "id": "87059", "name": "Tijeras", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222011609229777000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221204545877880000000/listings" },
+        { "id": "87102", "name": "Downtown", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222012002700902000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221204847284795000000/listings" },
+        { "id": "87104", "name": "Sawmill/Near North Valley", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222012220726119000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221205031709476000000/listings" },
+        { "id": "87105", "name": "South Valley", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222012453058715000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221205210305069000000/listings" },
+        { "id": "87106", "name": "UNM/Mesa Del Sol", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222012607353261000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221205313901831000000/listings" },
+        { "id": "87107", "name": "North Valley/Los Ranchos", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222012725728388000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221205445514620000000/listings" },
+        { "id": "87108", "name": "Fairgrounds/Kirtland AFB", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222012836165920000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221205614762451000000/listings" },
+        { "id": "87109", "name": "Near NE Heights", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222012950444732000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221205731472722000000/listings" },
+        { "id": "87110", "name": "Uptown", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222013108214476000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221205840866061000000/listings" },
+        { "id": "87111", "name": "NE Heights/Foothills North", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222013216732224000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221205957107572000000/listings" },
+        { "id": "87112", "name": "NE Heights/Foothills South", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222013333434027000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221210107310335000000/listings" },
+        { "id": "87113", "name": "NE Valley/Balloon Fiesta Park", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222013458596323000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221210239001034000000/listings" },
+        { "id": "87114", "name": "Paradise Hills/Far North Valley", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222013613946993000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221210350567761000000/listings" },
+        { "id": "87120", "name": "Taylor Ranch/Ladera Heights", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222013730484085000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221210540220037000000/listings" },
+        { "id": "87121", "name": "West Mesa/Route 66 West", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222013838848575000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221210715841093000000/listings" },
+        { "id": "87122", "name": "N. ABQ Acres/Sandia Heights", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222014016993080000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221210909422986000000/listings" },
+        { "id": "87123", "name": "Four Hills/SE Heights", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222014129379610000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221211013678549000000/listings" }
+      ]
+    },
+    {
+      "title": "Sandoval County",
+      "zips": [
+        { "id": "87001", "name": "Algodones", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250320220120070618000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250507231056457754000000/listings" },
+        { "id": "87004", "name": "Bernalillo", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222004936712269000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221203021899308000000/listings" },
+        { "id": "87043", "name": "Placitas", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222011044072178000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221203815940564000000/listings" },
+        { "id": "87048", "name": "Corrales", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222011331573939000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221204313884009000000/listings" },
+        { "id": "87124", "name": "Southern Rio Rancho", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222014240504229000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221211115872714000000/listings" },
+        { "id": "87144", "name": "Northern Rio Rancho", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222014403420851000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221211216368831000000/listings" }
+      ]
+    },
+    {
+      "title": "Valencia County",
+      "zips": [
+        { "id": "87002", "name": "Belen", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250306180424355669000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250308173831424209000000/listings" },
+        { "id": "87031", "name": "Los Lunas", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222010823157013000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221203700749156000000/listings" },
+        { "id": "87042", "name": "Peralta", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250803162250968584000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250803161829758226000000/listings" },
+        { "id": "87068", "name": "Bosque Farms", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222011823222126000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221204720715479000000/listings" }
+      ]
+    },
+    {
+      "title": "Torrance/Santa Fe County",
+      "zips": [
+        { "id": "87015", "name": "Edgewood", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250222010601340683000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250221203508323392000000/listings" },
+        { "id": "87016", "name": "Estancia", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727150722337858000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727150751349771000000/listings" },
+        { "id": "87032", "name": "McIntosh", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727150239439758000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727150108787639000000/listings" },
+        { "id": "87035", "name": "Moriarty", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727151804341639000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727151502661089000000/listings" },
+        { "id": "87036", "name": "Mountainair", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727152744406477000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727152819331400000000/listings" },
+        { "id": "87056", "name": "Stanley", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727151937328606000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250803163213176604000000/listings" },
+        { "id": "87061", "name": "Torreon", "soldUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727152445582378000000/listings", "activeUrl": "https://my.flexmls.com/TravisSiemon/search/saved_searches/20250727152405423068000000/listings" }
+      ]
+    }
+  ]
+}

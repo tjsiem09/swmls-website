@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Homes For Sale & Recent Sales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', sans-serif; background-image: url('https://travisrealtor.neocities.org/EditBrowse/images/pexels-lilartsy-1194775%20(2).jpg'); background-position: center center; background-repeat: no-repeat; background-size: cover; background-attachment: fixed; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.4); z-index: -1; }
+        .body-no-scroll { overflow: hidden; }
+        .font-slab { font-family: 'Roboto Slab', serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+        .tab-button { -webkit-tap-highlight-color: transparent; }
+        .tab-button.active { border-color: #0ea5e9; background-color: #f0f9ff; color: #0284c7; }
+        #custom-footer { font-family: 'Inter', sans-serif; }
+        .zip-list-columns { column-count: 1; column-gap: 1.5rem; }
+        .zip-list-columns > * { break-inside: avoid; -webkit-column-break-inside: avoid; }
+        @media (min-width: 640px) { .zip-list-columns { column-count: 2; } }
+        @media (min-width: 1024px) { .zip-list-columns { column-count: 3; } }
+        @media (max-width: 639.98px) { #map-viewer-container > .p-4 { padding: 0; } }
+        .arrow-rotated { transform: rotate(180deg); }
+        .tooltip-container { position: absolute; display: none; bottom: auto; top: 100%; left: auto; right: 0; margin-top: 8px; z-index: 60;}
+        .js-tooltip-container { cursor: pointer; }
+        .chart-area { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0; }
+        .chart-nav-button { background: #fff; border: 1px solid #d1d5db; border-radius: 16px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .chart-nav-button:hover:not(:disabled) { border-color: #9ca3af; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+        .chart-nav-button:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; border-color: #d1d5db; }
+        .stats-tab-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; }
+        .metric-button { background: #fff; border: 1px solid #d1d5db; border-radius: 16px; padding: 8px 14px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; width: 100%; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .metric-button.active { background: rgba(44, 62, 80, 1); color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-color: rgba(44, 62, 80, 1); }
+        .stats-tooltip-container { position: relative; display: flex; align-items: center; justify-content: center; }
+        .stats-tooltip-text { visibility: hidden; width: 240px; background-color: #2c3e50; color: #fff; text-align: left; border-radius: 6px; padding: 8px 12px; position: absolute; z-index: 60; top: 125%; left: 50%; margin-left: -120px; opacity: 0; transition: opacity 0.2s ease-in-out; font-size: 12px; font-weight: 400; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .stats-tooltip-text::after { content: ""; position: absolute; bottom: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: transparent transparent #2c3e50 transparent; }
+        .stats-tooltip-container:hover .stats-tooltip-text { visibility: visible; opacity: 1; }
+        .metric-toggle { display: flex; justify-content: center; padding: 8px; background-color: #f3f4f6; border-radius: 12px; width: 100%; margin-top: 8px; }
+        .toggle-button { flex: 1; padding: 6px 12px; border: none; background-color: transparent; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 13px; transition: all 0.2s ease-in-out; color: #4b5563; }
+        .toggle-button.active { background-color: #ffffff; color: #1f2937; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .chart-pane { display: flex; flex-direction: column; text-align: center; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); background: #fff; overflow: hidden; }
+        .iframe-wrapper { width: 100%; height: 0; position: relative; }
+        .iframe-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        @media (min-width: 768px) {
+            .stats-tab-buttons { flex-direction: column; gap: 0.5rem; }
+            .metric-button { text-align: left; }
+        }
+        @media (max-width: 767.98px) {
+            .stats-tab-buttons { flex-direction: row; flex-wrap: wrap; justify-content: center;}
+            .metric-button { width: auto; }
+            .metric-item-wrapper { display: flex; flex-direction: column; align-items: center; }
+        }
+
+        /* --- Custom Styles for Modal Overlay --- */
+        .modal-panel[data-view="search"] {
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr;
+        }
+        .modal-panel[data-view="search"] > .modal-header-wrapper,
+        .modal-panel[data-view="search"] > .content-area {
+            grid-row: 1;
+            grid-column: 1;
+        }
+        .modal-panel[data-view="search"] > .modal-header-wrapper {
+            align-self: start;
+            z-index: 10;
+        }
+        .modal-panel[data-view="search"] > .content-area {
+            height: 100%;
+            min-height: 0;
+        }
+
+        /* --- Mobile Offsets (< 768px) --- */
+        @media (max-width: 767.98px) {
+            #item-detail-modal .modal-panel[data-view="search"] > .content-area {
+                padding-top: 38px;
+                transform: translateY(-0px);
+            }
+            #price-range-modal .modal-panel[data-view="search"] > .content-area {
+                padding-top: 48px;
+                transform: translateY(-0px);
+            }
+        }
+
+        /* --- Tablet Offsets (768px - 1023.98px) --- */
+        @media (min-width: 768px) and (max-width: 1023.98px) {
+            #item-detail-modal .modal-panel[data-view="search"] > .content-area {
+                padding-top: 69px; /* Adjust this value for the Area/ZIP modal on tablets */
+            }
+            #price-range-modal .modal-panel[data-view="search"] > .content-area {
+                padding-top: 71px; /* Adjust this value for the Price Range modal on tablets */
+            }
+        }
+
+        /* --- Desktop Offsets (>= 1024px) --- */
+        @media (min-width: 1024px) {
+            #item-detail-modal .modal-panel[data-view="search"] > .content-area {
+                padding-top: 56px; /* Adjust this value for the Area/ZIP modal */
+            }
+            #price-range-modal .modal-panel[data-view="search"] > .content-area {
+                padding-top: 56px; /* Adjust this value for the taller Price Range modal */
+            }
+        }
+        
+        /* --- Custom Card Transparency Styles --- */
+        .max-w-7xl .bg-white:not(#modal-container .bg-white):not(.js-tooltip-container .bg-white) {
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        #map-viewer-container .bg-white {
+            background-color: rgb(255, 255, 255);
+        }
+        /* --- End of Custom Styles --- */
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-12">
+        <div class="w-full flex flex-col items-center">
+            <h2 class="bg-gray-700 text-white font-slab font-bold px-6 py-2 rounded-t-lg shadow-md z-10 text-sm">Start a new search</h2>
+            <div class="w-full bg-white border border-sky-300 rounded-lg p-4 flex flex-col gap-4 -mt-px">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center items-start gap-4 w-full">
+                    <div class="flex-grow text-center sm:text-left">
+                        <button class="info-dropdown-toggle inline-flex items-center gap-2 text-left font-slab text-xl font-bold text-gray-800">
+                            <span>SWMLS Database Search & Public Detail Reports</span>
+                            <svg class="w-5 h-5 transition-transform duration-200 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="hidden mt-3 pl-3 border-l-2 border-sky-200 text-sm text-gray-600 space-y-4 text-left">
+                                <div>
+                                    <strong class="font-semibold text-gray-800">What you can do here</strong>
+                                    <ul class="list-disc list-inside space-y-1 mt-1">
+                                        <li>Perform detailed searches across all active and pending listings in the Southwest MLS (SWMLS) database
+                                            <span class="relative js-tooltip-container js-main-tooltip inline-flex items-center align-middle p-2 -m-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                                <div class="absolute hidden top-full mt-2 left-1/2 -translate-x-1/2 w-[90vw] max-w-xs bg-white border border-gray-200 rounded-lg shadow-xl z-50 p-3 text-center sm:text-left pointer-events-auto max-h-48 overflow-y-auto custom-scrollbar">
+                                                    <div class="absolute w-3 h-3 bg-white border-l border-t border-gray-200" style="top: -7px; left: 50%; transform: translateX(-50%) rotate(45deg); z-index: 1;"></div>
+                                                    <img src="https://travisrealtor.neocities.org/EditBrowse/images/GAAR,SWMLS.png" alt="GAAR and SWMLS Logos" class="h-12 mx-auto mb-2">
+                                                    The Southwest Multiple Listing Service (SWMLS) is a wholly owned subsidiary of the Greater Albuquerque Association of REALTORS® (GAAR).
+                                                </div>
+                                            </span>
+                                        </li>
+                                        <li>Access the full 
+                                            <span class="relative js-tooltip-container js-main-tooltip inline-block">
+                                                <strong class="text-sky-600">MLS Public Detail Report</strong>
+                                                <span class="absolute hidden top-full left-1/2 -translate-x-1/2 mt-2 w-[768px] max-w-[90vw] pointer-events-none z-30">
+                                                    <img src="https://i.postimg.cc/d1CrjF1f/croppedbetterBreakingBadHouseDetailReport.png" alt="MLS Public Detail Report screenshot" class="w-full h-auto border-2 border-sky-300 rounded-md shadow-lg">
+                                                </span>
+                                            </span> 
+                                        for each property</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong class="font-semibold text-gray-800">💡 Tip for performing detailed searches</strong>
+                                    <p class="mt-1">
+                                        Every field shown in an MLS Public Detail Report corresponds to a search filter you can add using the 
+                                        <span class="relative js-tooltip-container js-main-tooltip inline-block">
+                                            <strong class="text-sky-600">“Add a Field” button.</strong>
+                                            <span class="absolute hidden top-full left-1/2 -translate-x-1/2 mt-2 w-[392px] max-w-[90vw] pointer-events-none z-30">
+                                                <img src="https://i.postimg.cc/ZY900N5q/Add-a-field-another-one.png" alt="Add a Field screenshot" class="w-full h-auto border-2 border-sky-300 rounded-md shadow-lg">
+                                            </span>
+                                        </span>
+                                        This makes it easy to match MLS terminology and fine-tune your searches to discover more listings with the features and amenities that matter most to you.
+                                    </p>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-full sm:w-auto">
+                        <a id="open-search-modal-btn" href="https://link.flexmls.com/1tofeoq4pv04,16" target="_blank" rel="noopener noreferrer" class="text-sm flex w-full sm:w-44 bg-sky-600 text-white font-bold py-2 px-6 rounded-lg shadow hover:bg-sky-700 transition-colors items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"></path></svg>
+                            <span>Search SWMLS</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-full flex flex-col items-center">
+            <h2 class="bg-gray-700 text-white font-slab font-bold px-6 py-2 rounded-t-lg shadow-md z-10 text-sm">Map-based search</h2>
+            <div class="w-full bg-white border border-sky-300 rounded-lg p-4 -mt-px">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center items-start gap-4 w-full">
+                    <div class="flex-grow text-center sm:text-left w-full">
+                        <button class="info-dropdown-toggle inline-flex items-center gap-2 text-left font-slab text-xl font-bold text-gray-800"><span>SWMLS Map Tools: ‘Nosy Neighbor’ & ‘Overlays’</span><svg class="w-5 h-5 transition-transform duration-200 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+<div class="hidden mt-3 pl-3 border-l-2 border-sky-200 text-sm text-gray-600 space-y-4 text-left">
+    <div>
+        <strong class="font-semibold text-gray-800">1. Nosy Neighbor</strong>
+        <ul class="list-disc list-inside space-y-1 mt-1">
+            <li>Click the <span class="relative js-tooltip-container js-main-tooltip"><strong class="text-sky-600">blue info icon</strong>
+                <span class="absolute hidden bottom-full left-0 mb-1 w-[150px] max-w-[80vw] pointer-events-none z-30">
+                    <img src="https://i.postimg.cc/W40FzgSS/Nosy_Neighbor_Uptown_with_arrow.png" alt="Nosy Neighbor screenshot" class="w-full h-auto border-2 border-sky-300 rounded-md shadow-lg">
+                </span>
+            </span> in the lower right corner of the map to activate the ‘Nosy Neighbor’ feature.</li>
+            <li>Pan/zoom to find a property on the map.</li>
+            <li>Click on any property to view past sales prices and listing history (if available).</li>
+        </ul>
+    </div>
+    <div>
+        <strong class="font-semibold text-gray-800">2. Map overlays</strong>
+        <ul class="list-disc list-inside space-y-1 mt-1">
+            <li>Click 'Overlays' in the upper right corner of the map.</li>
+            <li>Select MLS areas, ZIP codes, school districts, zoning, or additional overlays to narrow down your preferred area.</li>
+        </ul>
+    </div>
+</div>
+                    </div>
+                    <button id="open-map-modal-btn" class="text-sm flex-shrink-0 w-full sm:w-44 bg-sky-600 text-white font-bold py-2 px-6 rounded-lg shadow hover:bg-sky-700 transition-colors flex items-center justify-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m-6 3l6-3m0 0l6-3m-6 3v10" /></svg><span>SWMLS Map</span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="bg-gray-700 text-white font-slab font-bold px-6 py-2 rounded-t-lg shadow-md z-10 text-sm">Browse saved searches</h2>
+            <div class="w-full bg-white p-4 sm:p-6 md:p-8 rounded-lg border border-gray-300 shadow-lg -mt-px">
+                <header class="w-full flex flex-col md:flex-row justify-between items-start pb-8 border-b-2 border-gray-300">
+                    <div>
+                        <h1 id="browse-main-title" class="font-slab text-3xl font-bold text-gray-800">Homes For Sale & Recent Sales by ZIP Code</h1>
+                        <div class="mt-2">
+                            <button id="info-dropdown-btn" class="flex items-center gap-2 text-lg text-gray-600 hover:text-gray-900 transition-colors text-left"><span id="browse-main-subtitle">Conveniently research your preferred ZIP code</span><svg class="w-5 h-5 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                            <div id="info-dropdown-panel" class="hidden mt-4 pl-4 border-l-2 border-sky-200 text-sm text-gray-600 space-y-3"></div>
+                        </div>
+                    </div>
+                    <img src="https://travisrealtor.neocities.org/EditBrowse/images/SWMLS_Icon_Horizontal_RGB.png" alt="Southwest MLS Logo" class="h-12 md:h-16 flex-shrink-0 mt-4 md:mt-0">
+                </header>
+                
+                <div class="mt-8 mb-6">
+                    <div class="border-b border-gray-300">
+                        <nav class="flex -mb-px">
+                            <button id="zip-code-tab" type="button" class="tab-button active text-gray-800 w-1/2 py-3 px-1 border-b-2 font-bold text-base text-center border-transparent hover:text-sky-700 hover:border-gray-300 transition-colors duration-200">Browse by ZIP Code</button>
+                            <button id="mls-area-tab" type="button" class="tab-button text-gray-800 w-1/2 py-3 px-1 border-b-2 font-bold text-base text-center border-transparent hover:text-sky-700 hover:border-gray-300 transition-colors duration-200">Browse by MLS Area</button>
+                        </nav>
+                    </div>
+                </div>
+
+                <div id="mls-area-content" class="mt-8 hidden">
+                    <div id="map-viewer-container" class="space-y-8">
+                        <div class="text-center p-8 text-gray-500">Loading MLS Area data...</div>
+                    </div>
+                </div>
+
+                <div id="zip-code-content">
+                    <div class="my-6 relative">
+                        <label for="zip-search" class="sr-only">Search by ZIP Code</label>
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg></div>
+                        <input type="text" id="zip-search" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm" placeholder="Filter the list below by ZIP code...">
+                    </div>
+                    <div id="zip-viewer-container" class="space-y-8 mt-4">
+                            <div class="text-center p-8 text-gray-500">Loading ZIP Code data...</div>
+                    </div>
+                    <div id="no-results" class="hidden text-center text-gray-600 py-8">
+                        <h3 class="text-lg font-semibold">No matching ZIP codes found.</h3>
+                        <p class="text-sm">Please try a different search term.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-container"></div>
+
+    <div class="max-w-7xl mx-auto mt-12">
+        <footer id="custom-footer" class="bg-white rounded-lg border border-gray-300 shadow-lg p-8">
+            <div class="mx-auto flex flex-col md:flex-row flex-wrap justify-center items-center gap-x-8 gap-y-6 text-sm">
+                <div class="text-center">
+                    <p class="font-semibold text-gray-800">Travis J. Siemon, REALTOR<sup class="text-xs">®</sup></p>
+                    <a href="https://www.travis.realtor/real-estate-license" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-500 hover:text-blue-600 underline mt-1 block">License No. REC-2023-0057</a>
+                    <a href="sms:5053626947" class="text-blue-600 hover:text-blue-800 underline mt-3 inline-block font-medium">Send me a text 📱 505-362-6947</a>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <a href="https://www.facebook.com/TravisJSiemonRealtor" target="_blank" rel="noopener noreferrer" title="Facebook" class="p-1 rounded-full transition-transform hover:scale-110"><img src="https://travisrealtor.neocities.org/EditBrowse/images/Facebook%20Logo.png" alt="Facebook" class="h-10 w-10" ></a>
+                    <a href="https://x.com/TravisKWABQ" target="_blank" rel="noopener noreferrer" title="X" class="p-1 rounded-full transition-transform hover:scale-110"><img src="https://travisrealtor.neocities.org/EditBrowse/images/X%20logo.png" alt="X" class="h-10 w-10" ></a>
+                    <a href="https://maps.app.goo.gl/rkFZoMJwJhoJva579?g_st=ac" target="_blank" rel="noopener noreferrer" title="Google Maps" class="p-1 rounded-full transition-transform hover:scale-110"><img src="https://travisrealtor.neocities.org/EditBrowse/images/Google%20maps%20Logo%20(2).png" alt="Google Maps" class="h-10 w-10" ></a>
+                    <a href="https://www.realtor.com/realestateagents/63e4dfc8dc5785455ae6ea3d" target="_blank" rel="noopener noreferrer" title="Realtor.com" class="p-1 rounded-full transition-transform hover:scale-110"><img src="https://travisrealtor.neocities.org/EditBrowse/images/Realtor.com%20Logo.png" alt="Realtor.com" class="h-10 w-10" ></a>
+                   <a href="https://www.youtube.com/@TravisSiemon" target="_blank" rel="noopener noreferrer" title="YouTube" class="p-1 rounded-full transition-transform hover:scale-110"><img src="https://travisrealtor.neocities.org/EditBrowse/images/YouTube%20Logo.png" alt="YouTube" class="h-10 w-10" ></a>
+                </div>
+                <a href="https://travisjsiemon.kw.com/search" target="_blank" rel="noopener noreferrer">
+                    <img src="https://travisrealtor.neocities.org/EditBrowse/images/KW%20Albuquerque%20Logo.png" alt="KW Albuquerque Logo" class="h-16 w-auto" >
+                </a>
+                <div class="text-center text-gray-600">
+    <p>Powered by Keller Williams</p>
+    <p>Realty of Albuquerque</p>
+</div>
+
+<div class="text-center text-gray-600">
+    <a href="https://mls.travis.realtor/" target="_blank" rel="noopener noreferrer" class="font-bold text-gray-800 underline">mls.travis.realtor</a>
+    <p>Copyright © 2025</p>
+    <p>All rights reserved.</p>
+</div>
+                <div>
+                    <img src="https://travisrealtor.neocities.org/EditBrowse/images/EHO%20NAR%20MLS%20partial%20crop.png" alt="National Association of Realtors and Equal Housing Opportunity Logos" class="h-14 w-auto" >
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            async function loadData() {
+                try {
+                    const [browseResponse, marketResponse] = await Promise.all([
+                        fetch('./browse-data.json'),
+                        fetch('./market_stats.json')
+                    ]);
+                    if (!browseResponse.ok || !marketResponse.ok) {
+                        throw new Error('Network response was not ok.');
+                    }
+                    const browseData = await browseResponse.json();
+                    const marketData = await marketResponse.json();
+                    initializePage(browseData, marketData);
+                } catch (error) {
+                    console.error("Failed to load page data:", error);
+                    const zipContainer = document.getElementById('zip-viewer-container');
+                    if(zipContainer) zipContainer.innerHTML = `<div class="text-center p-8 text-red-700 bg-red-100 rounded-lg"><h3 class="font-bold">Error</h3><p>Could not load required data files. Please check file names and content.</p></div>`;
+                }
+            }
+
+            function initializePage(browseData, marketData) {
+                pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js`;
+
+                const { browseByMlsArea, browseByZip } = browseData;
+                const allAreas = browseByMlsArea.flatMap(map => map.areas);
+                const allZips = browseByZip.flatMap(county => county.zips);
+
+                const bodyEl = document.body;
+                let activeModal = null;
+                let mlsMapsRendered = false;
+                let currentView = 'active';
+
+                const modalContainer = document.getElementById('modal-container');
+                const mlsAreaTab = document.getElementById('mls-area-tab');
+                const zipCodeTab = document.getElementById('zip-code-tab');
+                const mlsAreaContent = document.getElementById('mls-area-content');
+                const zipCodeContent = document.getElementById('zip-code-content');
+                const zipSearchInput = document.getElementById('zip-search');
+                const noResultsMessage = document.getElementById('no-results');
+                const browseMainTitle = document.getElementById('browse-main-title');
+                const browseMainSubtitle = document.getElementById('browse-main-subtitle');
+
+                const itemDetailModalHTML = `<div id="item-detail-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center pt-1 px-1 pb-0 sm:pt-2 sm:px-2 sm:pb-o" style="height: 100dvh;"><div class="modal-panel bg-white w-full h-full rounded-lg shadow-2xl flex flex-col"><div class="modal-header-wrapper bg-white border-b"><div class="modal-header relative flex-shrink-0 p-2 flex justify-between items-center bg-white rounded-t-lg"><button data-nav="prev" class="order-1 flex-1 text-left text-xs md:text-sm text-blue-600 hover:underline p-2 disabled:opacity-50 disabled:no-underline"></button><button data-close class="order-2 h-8 w-8 bg-gray-200 rounded-full text-gray-700 flex items-center justify-center text-xl font-bold hover:bg-gray-300 flex-shrink-0 mx-2">×</button><button data-nav="next" class="order-3 flex-1 text-right text-xs md:text-sm text-blue-600 hover:underline p-2 disabled:opacity-50 disabled:no-underline"></button></div><div class="labels-area bg-white flex-shrink-0 p-3 md:p-2 md:border-b-0"><div class="flex justify-center items-center space-x-2 mb-2 md:mb-1 min-h-[28px] md:min-h-0"><a data-title-link href="#" target="_blank" class="group flex items-center space-x-2"><span data-title-text class="text-base md:text-base font-bold text-gray-800 text-center group-hover:underline"></span><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-4 md:w-4 text-gray-400 group-hover:text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></a></div><div class="flex justify-center items-center space-x-2"><button data-tab="active" class="tab-button px-3 py-1 md:px-3 md:py-1 font-semibold border-b-2 transition-colors text-xs md:text-xs">Active Listings</button><button data-tab="sold" class="tab-button px-3 py-1 md:px-3 md:py-1 font-semibold border-b-2 transition-colors text-xs md:text-xs">Recent Sales</button><button data-tab="stats" class="tab-button px-3 py-1 md:px-3 md:py-1 font-semibold border-b-2 transition-colors text-xs md:text-xs">Monthly Stats</button><div class="relative js-tooltip-container"><div class="ml-1 cursor-help"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg></div><div data-tooltip-content-main class="absolute hidden top-full mt-2 right-0 w-72 bg-white border border-gray-200 rounded-lg shadow-xl z-50 p-3 text-xs text-left text-gray-700 pointer-events-auto"><div class="absolute w-3 h-3 bg-white border-l border-t border-gray-200" style="bottom: 100%; right: 0.5rem; transform: translateY(50%) rotate(45deg); z-index: -1;"></div></div></div></div></div></div><div class="content-area flex-1 overflow-auto relative bg-slate-100"><iframe data-iframe src="" class="w-full h-full border-0"></iframe><div data-stats-content class="hidden w-full h-full overflow-y-auto p-4"></div></div></div></div>`;
+                const priceRangeModalHTML = `<div id="price-range-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center pt-1 px-1 pb-0 sm:pt-2 sm:px-2 sm:pb-0" style="height: 100dvh;"><div class="modal-panel bg-white w-full h-full rounded-lg shadow-2xl flex flex-col"><div class="modal-header-wrapper bg-white border-b"><div class="modal-header relative flex-shrink-0 p-2 flex justify-between items-center bg-white rounded-t-lg"><button data-nav="prev" class="order-1 flex-1 text-left text-xs md:text-sm text-blue-600 hover:underline p-2 disabled:opacity-50 disabled:no-underline"></button><button data-close class="order-2 h-8 w-8 bg-gray-200 rounded-full text-gray-700 flex items-center justify-center text-xl font-bold hover:bg-gray-300 flex-shrink-0 mx-2">×</button><button data-nav="next" class="order-3 flex-1 text-right text-xs md:text-sm text-blue-600 hover:underline p-2 disabled:opacity-50 disabled:no-underline"></button></div><div class="labels-area bg-white flex-shrink-0 p-2 md:border-b-0 space-y-2"><div class="flex flex-col md:flex-row justify-center items-center gap-2"><a data-main-link href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center space-x-2"><h2 data-title-text class="text-base md:text-base font-bold text-gray-800 text-center group-hover:underline"></h2><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-4 md:w-4 text-gray-400 group-hover:text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a><select data-price-select class="w-full md:w-auto text-sm md:text-xs border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 md:py-1"></select></div><div class="flex justify-center items-center space-x-2"><button data-tab="active" class="tab-button px-3 py-1 md:px-3 md:py-1 text-xs md:text-xs font-semibold border-b-2 transition-colors">Active Listings</button><button data-tab="sold" class="tab-button px-3 py-1 md:px-3 md:py-1 text-xs md:text-xs font-semibold border-b-2 transition-colors">Recent Sales</button><div class="relative js-tooltip-container"><div class="ml-1 cursor-help"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg></div><div data-tooltip-content-main class="absolute hidden top-full mt-2 right-0 w-72 bg-white border border-gray-200 rounded-lg shadow-xl z-50 p-3 text-xs text-left text-gray-700 pointer-events-auto"><div class="absolute w-3 h-3 bg-white border-l border-t border-gray-200" style="bottom: 100%; right: 0.5rem; transform: translateY(50%) rotate(45deg); z-index: -1;"></div></div></div></div></div></div><div class="content-area flex-1 overflow-auto" style="min-height: 0;"><iframe data-iframe src="" class="w-full h-full border-0"></iframe></div></div></div>`;
+                const searchMlsModalHTML = `<div id="search-mls-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-1 sm:p-4" style="height: 100dvh;"><div class="bg-white w-full h-full rounded-lg shadow-2xl grid" style="grid-template-rows: auto 1fr auto;"><div class="p-2 sm:p-4 flex justify-between items-center border-b bg-gray-50 rounded-t-lg"><div class="order-1 flex-1 text-left"><a href="https://link.flexmls.com/1tofeoq4pv04,16" target="_blank" rel="noopener noreferrer" title="Open in new window" class="group inline-flex items-center gap-2 text-gray-800 hover:text-sky-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 group-hover:text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></a></div><button data-close class="order-2 flex-shrink-0 h-8 w-8 bg-gray-200 rounded-full text-gray-700 flex items-center justify-center text-xl font-bold hover:bg-gray-300 mx-2">×</button><div class="order-3 flex-1 text-right"><img src="https://travisrealtor.neocities.org/EditBrowse/images/SWMLS_Icon_Horizontal_RGB.png" alt="Southwest MLS Logo" class="h-6 sm:h-8 inline-block"></div></div><div class="overflow-hidden" style="min-height: 0;"><iframe data-iframe data-src="https://link.flexmls.com/1tofeoq4pv04,16" class="w-full h-full border-0"></iframe></div><div class="hidden sm:flex justify-center p-3 border-t bg-gray-50 rounded-b-lg"><a href="https://youtu.be/lLCdln7lqDQ" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 text-sm text-gray-600 hover:text-sky-700 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg><span>Need help? Watch a quick video on how to use this search tool.</span></a></div></div></div>`;
+                const mapToolsModalHTML = `<div id="map-tools-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center pt-1 px-1 pb-5 sm:pt-4 sm:px-1 sm:pb-5" style="height: 100dvh;"><div class="bg-white w-full h-full rounded-lg shadow-2xl grid" style="grid-template-rows: auto 1fr auto;"><div class="p-2 sm:p-4 flex justify-between items-center border-b bg-gray-50 rounded-t-lg"><div class="flex-1 text-left"><a href="https://link.flexmls.com/cgi-bin/mainmenu.cgi?cmd=url+other%2Fpopup%2Fpopup_map.html&no_html_header=true&hardExtents=-106.89021423731072%2C35.04547580497931%2C-106.3972027626934%2C35.204410454038694&hardDynamicData=20250821041718226069000000&hardDynamicColorScheme=color_pric&poi_count=0&no_html_header=true&tech_id=x%2720230202154042314334000000%27&ma_tech_id=x%2720130226171930207216000000%27" target="_blank" rel="noopener noreferrer" title="Open in new window" class="group inline-flex items-center gap-2 text-gray-800 hover:text-sky-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 group-hover:text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></a></div><button data-close class="flex-shrink-0 h-8 w-8 bg-gray-200 rounded-full text-gray-700 flex items-center justify-center text-xl font-bold hover:bg-gray-300 mx-2">×</button><div class="flex-1 text-right"><img src="https://travisrealtor.neocities.org/EditBrowse/images/SWMLS_Icon_Horizontal_RGB.png" alt="Southwest MLS Logo" class="h-6 sm:h-8 inline-block"></div></div><div class="overflow-hidden" style="min-height: 0;"><iframe data-iframe data-src="https://link.flexmls.com/cgi-bin/mainmenu.cgi?cmd=url+other%2Fpopup%2Fpopup_map.html&no_html_header=true&hardExtents=-106.89021423731072%2C35.04547580497931%2C-106.3972027626934%2C35.204410454038694&hardDynamicData=20250821041718226069000000&hardDynamicColorScheme=color_pric&poi_count=0&no_html_header=true&tech_id=x%2720230202154042314334000000%27&ma_tech_id=x%2720130226171930207216000000%27" class="w-full h-full border-0"></iframe></div><div class="p-3 border-t bg-gray-50 rounded-b-lg text-center"><div id="map-footer-toggle" class="inline-block cursor-pointer"><div class="flex items-center justify-center gap-2 text-sm text-sky-600 font-semibold"><span>How to use the SWMLS map tools</span><svg id="map-footer-arrow" class="h-5 w-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg></div><div id="map-footer-content" class="hidden mt-3 text-xs text-gray-600 text-left space-y-2"><div><strong class="font-semibold text-gray-800">1. Nosy Neighbor</strong><ul class="list-disc pl-8 space-y-1 mt-1"><li>Click the <span class="relative js-tooltip-container"><strong class="text-sky-600">blue info icon</strong><img src="https://i.postimg.cc/DZR3L5zs/Nosy_Neighbor_icon.png" alt="Nosy Neighbor Icon" class="absolute hidden bottom-full left-0 mb-1 w-10 border rounded shadow-lg z-30"/></span> in the lower right corner of the map to activate the ‘Nosy Neighbor’ feature.</li><li>Pan/zoom to find a property on the map.</li><li>Click on any property to view past sales prices and listing history (if available).</li></ul></div><div><strong class="font-semibold text-gray-800">2. Map overlays</strong><ul class="list-disc pl-8 space-y-1 mt-1"><li>Click 'Overlays' in the upper right corner of the map.</li><li>Select MLS areas, ZIP codes, school districts, zoning, or additional overlays to narrow down your preferred area</li></ul></div></div></div></div></div>`;
+                modalContainer.innerHTML = itemDetailModalHTML + priceRangeModalHTML + searchMlsModalHTML + mapToolsModalHTML;
+
+                // ... Rest of the script remains the same
+                const majorAreaUrlMap = {
+                    'Albuquerque East': 'abqeast',
+                    'Albuquerque West': 'abqwest',
+                    'Rio Rancho & Southern Sandoval County': 'sandovalcounty',
+                    'East Mountain Area & Estancia Basin': 'eastmountains',
+                    'Valencia County': 'valenciacounty'
+                };
+                
+                const allModals = Array.from(modalContainer.children);
+                function openModal(modal) {
+                    if (activeModal) closeModal(activeModal);
+                    modal.classList.remove('hidden');
+                    bodyEl.classList.add('body-no-scroll');
+                    activeModal = modal;
+                    const iframe = modal.querySelector('[data-iframe]');
+                    
+                    const isPersistentModal = modal.id === 'search-mls-modal' || modal.id === 'map-tools-modal';
+                    if (isPersistentModal) {
+                        if (iframe && iframe.dataset.src && !iframe.src) {
+                            iframe.src = iframe.dataset.src;
+                        }
+                    } else {
+                        if (iframe && iframe.dataset.src && iframe.src !== iframe.dataset.src) {
+                            iframe.src = iframe.dataset.src;
+                        }
+                    }
+                }
+
+                function closeModal(modal) {
+                    if (!modal) return;
+                    
+                    modal.classList.add('hidden');
+                    bodyEl.classList.remove('body-no-scroll');
+                    
+                    const isPersistentModal = modal.id === 'search-mls-modal' || modal.id === 'map-tools-modal';
+
+                    if (!isPersistentModal) {
+                        const iframe = modal.querySelector('[data-iframe]');
+                        if (iframe) iframe.src = 'about:blank';
+                        const statsContent = modal.querySelector('[data-stats-content]');
+                        if (statsContent) statsContent.innerHTML = '';
+                    }
+
+                    if (activeModal === modal) activeModal = null;
+                }
+                
+                allModals.forEach(modal => {
+                    if (modal) modal.querySelector('[data-close]').addEventListener('click', () => closeModal(modal));
+                });
+                window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && activeModal) closeModal(activeModal); });
+                
+                document.getElementById('open-search-modal-btn').addEventListener('click', (event) => {
+                    if (window.innerWidth >= 640) {
+                        event.preventDefault(); 
+                        openModal(document.getElementById('search-mls-modal'));
+                    }
+                });
+
+                document.getElementById('open-map-modal-btn').addEventListener('click', () => openModal(document.getElementById('map-tools-modal')));
+
+                const mapFooterToggle = document.getElementById('map-footer-toggle');
+                if (mapFooterToggle) {
+                    mapFooterToggle.addEventListener('click', () => {
+                        document.getElementById('map-footer-content').classList.toggle('hidden');
+                        document.getElementById('map-footer-arrow').classList.toggle('arrow-rotated');
+                    });
+                }
+                
+                let currentData, currentContext, currentDataIndex;
+                const itemDetailModal = document.getElementById('item-detail-modal');
+                const itemDetailModalElements = {
+                    modal: itemDetailModal,
+                    prevBtn: itemDetailModal.querySelector('[data-nav="prev"]'),
+                    nextBtn: itemDetailModal.querySelector('[data-nav="next"]'),
+                    titleLink: itemDetailModal.querySelector('[data-title-link]'),
+                    titleText: itemDetailModal.querySelector('[data-title-text]'),
+                    tooltipContent: itemDetailModal.querySelector('[data-tooltip-content-main]'),
+                    activeTab: itemDetailModal.querySelector('[data-tab="active"]'),
+                    soldTab: itemDetailModal.querySelector('[data-tab="sold"]'),
+                    statsTab: itemDetailModal.querySelector('[data-tab="stats"]'),
+                    iframe: itemDetailModal.querySelector('[data-iframe]'),
+                    statsContent: itemDetailModal.querySelector('[data-stats-content]')
+                };
+
+                function updateItemDetailModal() {
+                    const item = currentData[currentDataIndex];
+                    if (!item) return;
+
+                    const panel = itemDetailModalElements.modal.querySelector('.modal-panel');
+                    if (currentView === 'stats') {
+                        panel.dataset.view = 'stats';
+                    } else {
+                        panel.dataset.view = 'search';
+                    }
+
+                    const hasStats = currentContext === 'zip' && marketData[item.id];
+                    itemDetailModalElements.statsTab.style.display = hasStats ? 'inline-flex' : 'none';
+                    if (currentView === 'stats' && !hasStats) { currentView = 'active'; }
+                    
+                    const contextText = currentContext === 'zip' ? `ZIP code ${item.id}` : `MLS Area ${item.id}`;
+                    let tooltipHtml = '';
+                    switch(currentView) {
+                        case 'active':
+                            const activeUrl = item.activeUrl || '#';
+                            tooltipHtml = `Displays all currently active residential listings in ${contextText}. <a href="${activeUrl}" target="_blank" rel="noopener noreferrer" title="Open saved search in new window" class="inline-block ml-1 pointer-events-auto text-sky-500 hover:text-sky-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></a>`;
+                            break;
+                        case 'sold':
+                            const soldUrl = item.soldUrl || '#';
+                            tooltipHtml = `Displays all residential listings in ${contextText} that went under contract (pending), or sold (closed) within the last 180 days. <a href="${soldUrl}" target="_blank" rel="noopener noreferrer" title="Open saved search in new window" class="inline-block ml-1 pointer-events-auto text-sky-500 hover:text-sky-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></a><div class="mt-2 pt-2 border-t border-gray-100 text-gray-500">💡 Click the pie chart icon to explore real-time statistics for search results.</div>`;
+                            break;
+                        case 'stats':
+                            tooltipHtml = `Compares data for ${contextText} with the entire MLS.<div class="mt-2 pt-2 border-t border-gray-100 text-gray-500">💡Click the color legend to toggle the 'Entire MLS' or '${item.id}' data. The chart scale will adjust automatically.</div>`;
+                            break;
+                    }
+                    itemDetailModalElements.tooltipContent.innerHTML = tooltipHtml;
+
+                    itemDetailModalElements.iframe.classList.toggle('hidden', currentView === 'stats');
+                    itemDetailModalElements.statsContent.classList.toggle('hidden', currentView !== 'stats');
+                    itemDetailModalElements.activeTab.classList.toggle('active', currentView === 'active');
+                    itemDetailModalElements.soldTab.classList.toggle('active', currentView === 'sold');
+                    itemDetailModalElements.statsTab.classList.toggle('active', currentView === 'stats');
+                    
+                    if (currentView === 'stats') {
+                        initStatsViewer(item.id);
+                    } else {
+                        const iframeUrl = currentView === 'active' ? item.activeUrl : item.soldUrl;
+                        if(itemDetailModalElements.iframe.src !== iframeUrl) itemDetailModalElements.iframe.src = iframeUrl || 'about:blank';
+                    }
+                    itemDetailModalElements.titleText.textContent = `${item.id} - ${item.name}`;
+                    itemDetailModalElements.titleLink.href = `https://www.travis.realtor/${item.id}`;
+                    itemDetailModalElements.prevBtn.disabled = currentDataIndex === 0;
+                    const prevItem = currentData[currentDataIndex - 1];
+                    itemDetailModalElements.prevBtn.innerHTML = prevItem ? `<span class="hidden md:inline">‹ ${prevItem.id} - ${prevItem.name}</span><span class="md:hidden">‹ Prev</span>` : '‹ Previous';
+                    itemDetailModalElements.nextBtn.disabled = currentDataIndex >= currentData.length - 1;
+                    const nextItem = currentData[currentDataIndex + 1];
+                    itemDetailModalElements.nextBtn.innerHTML = nextItem ? `<span class="hidden md:inline">${nextItem.id} - ${nextItem.name} ›</span><span class="md:hidden">Next ›</span>` : 'Next ›';
+                }
+
+                function openItemDetailModal(index, context) {
+                    currentData = context === 'mls' ? allAreas : allZips;
+                    currentContext = context;
+                    currentDataIndex = index;
+                    updateItemDetailModal();
+                    openModal(itemDetailModal);
+                }
+
+                itemDetailModalElements.activeTab.addEventListener('click', () => { if (currentView !== 'active') { currentView = 'active'; updateItemDetailModal(); } });
+                itemDetailModalElements.soldTab.addEventListener('click', () => { if (currentView !== 'sold') { currentView = 'sold'; updateItemDetailModal(); } });
+                itemDetailModalElements.statsTab.addEventListener('click', () => { if (currentView !== 'stats') { currentView = 'stats'; updateItemDetailModal(); } });
+                itemDetailModalElements.prevBtn.addEventListener('click', () => { if (currentDataIndex > 0) { currentDataIndex--; updateItemDetailModal(); } });
+                itemDetailModalElements.nextBtn.addEventListener('click', () => { if (currentDataIndex < currentData.length - 1) { currentDataIndex++; updateItemDetailModal(); } });
+                
+                function formatPriceRange(label) {
+                    const parts = label.replace(/\$/g, '').split('-');
+                    const formatPart = (part, isMinPart) => {
+                        const num = parseFloat(part);
+                        let multiplier = 1;
+                        if (part.toLowerCase().includes('m')) multiplier = 1000000;
+                        else if (part.toLowerCase().includes('k')) multiplier = 1000;
+                        let value = num * multiplier;
+                        if (!isMinPart && multiplier === 1000 && value % 1000 === 0 && num !== 0) {
+                            value += 999;
+                        }
+                        return '$' + value.toLocaleString('en-US');
+                    };
+
+                    if (parts.length === 2) {
+                        return `${formatPart(parts[0], true)} - ${formatPart(parts[1], false)}`;
+                    } else {
+                        return formatPart(parts[0], true) + (label.includes('+') ? '+' : '');
+                    }
+                }
+
+                // --- Price Range Modal Logic ---
+                let currentMajorAreaIndex, currentPriceRangeIndex;
+                const priceRangeModal = document.getElementById('price-range-modal');
+                const priceRangeModalElements = {
+                    modal: priceRangeModal,
+                    prevBtn: priceRangeModal.querySelector('[data-nav="prev"]'),
+                    nextBtn: priceRangeModal.querySelector('[data-nav="next"]'),
+                    mainLink: priceRangeModal.querySelector('[data-main-link]'),
+                    titleText: priceRangeModal.querySelector('[data-title-text]'),
+                    tooltipContent: priceRangeModal.querySelector('[data-tooltip-content-main]'),
+                    priceSelect: priceRangeModal.querySelector('[data-price-select]'),
+                    activeTab: priceRangeModal.querySelector('[data-tab="active"]'),
+                    soldTab: priceRangeModal.querySelector('[data-tab="sold"]'),
+                    iframe: priceRangeModal.querySelector('[data-iframe]')
+                };
+                
+                function updatePriceRangeModal() {
+                    const majorArea = browseByMlsArea[currentMajorAreaIndex];
+                    if (!majorArea) return;
+                    const priceRange = majorArea.priceRanges[currentPriceRangeIndex];
+                    if (!priceRange) return;
+
+                    priceRangeModalElements.titleText.textContent = majorArea.title;
+                    
+                    const urlPath = majorAreaUrlMap[majorArea.title];
+                    if (urlPath) {
+                        priceRangeModalElements.mainLink.href = `https://www.travis.realtor/${urlPath}`;
+                    } else {
+                        // Fallback for safety
+                        priceRangeModalElements.mainLink.href = `https://www.travis.realtor/${majorArea.title.toLowerCase().replace(/ \- /g, '').replace(/ /g, '')}`;
+                    }
+
+                    priceRangeModalElements.priceSelect.innerHTML = majorArea.priceRanges.map((pr, index) => `<option value="${index}">${pr.label === '$0-$199k' ? 'Under $199k' : pr.label}</option>`).join('');
+                    priceRangeModalElements.priceSelect.value = currentPriceRangeIndex;
+
+                    priceRangeModalElements.activeTab.classList.toggle('active', currentView === 'active');
+                    priceRangeModalElements.soldTab.classList.toggle('active', currentView === 'sold');
+                    const url = currentView === 'active' ? priceRange.activeUrl : priceRange.soldUrl;
+                    if (priceRangeModalElements.iframe.src !== url) priceRangeModalElements.iframe.src = url || 'about:blank';
+
+                    priceRangeModalElements.prevBtn.disabled = currentMajorAreaIndex === 0;
+                    const prevArea = browseByMlsArea[currentMajorAreaIndex - 1];
+                    priceRangeModalElements.prevBtn.innerHTML = prevArea ? `<span class="hidden md:inline">‹ ${prevArea.title}</span><span class="md:hidden">‹ Prev</span>` : '‹ Previous';
+                    priceRangeModalElements.nextBtn.disabled = currentMajorAreaIndex >= browseByMlsArea.length - 1;
+                    const nextArea = browseByMlsArea[currentMajorAreaIndex + 1];
+                    priceRangeModalElements.nextBtn.innerHTML = nextArea ? `<span class="hidden md:inline">${nextArea.title} ›</span><span class="md:hidden">Next ›</span>` : 'Next ›';
+
+                    const areaIds = majorArea.areas.map(a => a.id);
+                    const areaRange = `<strong>${Math.min(...areaIds)}-${Math.max(...areaIds)}</strong>`;
+                    let tooltipHtml = '';
+                    const linkHtml = `<a href="${url}" target="_blank" rel="noopener noreferrer" title="Open saved search in new window" class="inline-block ml-1 pointer-events-auto text-sky-500 hover:text-sky-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></a>`;
+
+                    if (currentView === 'active') {
+                        if (currentPriceRangeIndex === 0) {
+                            tooltipHtml = `Displays all currently active residential listings in MLS Areas ${areaRange}, priced across all price points. ${linkHtml}`;
+                        } else {
+                            const priceDescription = `priced between <strong>${formatPriceRange(priceRange.label)}</strong>`;
+                            tooltipHtml = `Displays all currently active residential listings ${priceDescription} in MLS Areas ${areaRange}. ${linkHtml}`;
+                        }
+                    } else { // 'sold' view
+                        let priceDescription;
+                        if (currentPriceRangeIndex === 0) {
+                            priceDescription = 'priced across all price points';
+                        } else {
+                            priceDescription = `priced between <strong>${formatPriceRange(priceRange.label)}</strong>`;
+                        }
+                        const timeframeText = 'that went under contract (pending), or sold (closed) within the last <strong>30 days</strong>.';
+                        const pieChartTip = `<div class="mt-2 pt-2 border-t border-gray-100 text-gray-500">💡Click the pie chart icon to explore real-time statistics for search results.</div>`;
+                        tooltipHtml = `Displays all residential listings ${priceDescription} in MLS Areas ${areaRange}, ${timeframeText} ${linkHtml}${pieChartTip}`;
+                    }
+                    priceRangeModalElements.tooltipContent.innerHTML = tooltipHtml;
+                }
+
+                function openPriceRangeModal(majorIndex, priceIndex) {
+                    currentMajorAreaIndex = majorIndex;
+                    currentPriceRangeIndex = priceIndex;
+                    updatePriceRangeModal();
+                    const panel = priceRangeModal.querySelector('.modal-panel');
+                    panel.dataset.view = 'search';
+                    openModal(priceRangeModal);
+                }
+
+                priceRangeModalElements.activeTab.addEventListener('click', () => { if (currentView !== 'active') { currentView = 'active'; updatePriceRangeModal(); } });
+                priceRangeModalElements.soldTab.addEventListener('click', () => { if (currentView !== 'sold') { currentView = 'sold'; updatePriceRangeModal(); } });
+                priceRangeModalElements.priceSelect.addEventListener('change', (e) => { currentPriceRangeIndex = parseInt(e.target.value); updatePriceRangeModal(); });
+                priceRangeModalElements.prevBtn.addEventListener('click', () => { if (currentMajorAreaIndex > 0) { currentMajorAreaIndex--; currentPriceRangeIndex = 0; updatePriceRangeModal(); } });
+                priceRangeModalElements.nextBtn.addEventListener('click', () => { if (currentMajorAreaIndex < browseByMlsArea.length - 1) { currentMajorAreaIndex++; currentPriceRangeIndex = 0; updatePriceRangeModal(); } });
+
+                // --- FAITHFUL REPLICATION OF EXAMPLE STATS VIEWER ---
+                const statsViewerHTML = `
+                    <button id="menu-toggle" class="hidden lg:flex items-center justify-center absolute top-1/2 right-0 w-8 h-16 bg-white rounded-l-lg shadow-lg border z-20 focus:outline-none transform -translate-y-1/2">
+                        <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                    <div class="chart-area">
+                        <div id="stats-chart-navigation" class="flex justify-between items-center w-full mb-4">
+                            <button id="stats-prev-button" class="chart-nav-button">← Previous</button>
+                            <img src="https://i.postimg.cc/6p7x9ZPK/gaar-logo.png" alt="GAAR Logo" class="h-9">
+                            <button id="stats-next-button" class="chart-nav-button">Next →</button>
+                        </div>
+                        <div class="flex flex-col md:flex-row items-start gap-8">
+                            <div class="w-full md:w-2/3 lg:flex-1">
+                                <div class="max-w-[500px] mx-auto lg:max-w-none lg:mx-0">
+                                    <div class="flex flex-col lg:flex-row gap-5">
+                                        <div class="chart-pane w-full lg:w-1/3" id="statsLeftPane">
+                                            <h2 class="font-slab text-lg md:text-xl font-bold text-gray-700 mb-2 mt-4 text-center">Monthly Snapshot (3-Year)</h2>
+                                            <div class="iframe-wrapper" id="statsLeftIframeWrapper"></div>
+                                        </div>
+                                        <div class="chart-pane w-full lg:w-2/3" id="statsRightPane">
+                                            <h2 class="font-slab text-lg md:text-xl font-bold text-gray-700 mb-2 mt-4 text-center">Historical Trend (10-Year)</h2>
+                                            <div class="iframe-wrapper" id="statsRightIframeWrapper"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="menu-container" class="w-full md:w-1/3 lg:w-64 lg:flex-shrink-0">
+                                <div id="menu-content" class="transition-all duration-300 ease-in-out overflow-hidden max-h-[1000px]">
+                                    <div class="stats-tab-buttons" id="statsTabButtons"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+
+                const initStatsViewer = (function() { 
+                    let isInitialized = false, currentZip = '', currentIndex = 0, currentMetricType = 'median', dom = {}; 
+                    const metricDetails = [ { name: "Sales Price", isToggle: true }, { name: "New Listings" }, { name: "Homes For Sale" }, { name: "Pending Sales" }, { name: "Closed Sales" }, { name: "Days on Market", isToggle: true }, { name: "Months Supply" }, { name: "Avg. % of List Price Received" }, { name: "Price per Sq. Ft.", isToggle: true }, { name: "Dollar Volume" }, { name: "Showings per Listing" } ]; 
+                    function debounce(func, delay) { let timeout; return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); }; } 
+                    function cacheDom() { 
+                        dom = { 
+                            container: itemDetailModal.querySelector('[data-stats-content]'), 
+                            leftPane: document.getElementById('statsLeftPane'), 
+                            rightPane: document.getElementById('statsRightPane'), 
+                            leftIframeWrapper: document.getElementById('statsLeftIframeWrapper'), 
+                            rightIframeWrapper: document.getElementById('statsRightIframeWrapper'), 
+                            tabButtonsContainer: document.getElementById('statsTabButtons'), 
+                            prevButton: document.getElementById('stats-prev-button'), 
+                            nextButton: document.getElementById('stats-next-button'),
+                            menuContainer: document.getElementById('menu-container'),
+                            menuContent: document.getElementById('menu-content'),
+                            menuToggle: document.getElementById('menu-toggle')
+                        }; 
+                        isInitialized = true; 
+                    } 
+                    function renderAndResizeCharts() { 
+                        if (!isInitialized || !dom.leftPane) return; 
+                        const metricDetail = metricDetails[currentIndex]; if (!metricDetail) return; 
+                        const zipData = marketData[currentZip]; if (!zipData) return; 
+                        const chartDataGroup = zipData[metricDetail.name]; if (!chartDataGroup) return; 
+                        let chartData = metricDetail.isToggle ? chartDataGroup[currentMetricType] : chartDataGroup; if (!chartData) return; 
+                        
+                        requestAnimationFrame(() => {
+                            if (dom.leftPane.clientWidth === 0) { setTimeout(renderAndResizeCharts, 50); return; }
+                            
+                            const isLargeScreen = window.innerWidth >= 1024;
+                            let leftWidth = Math.floor(dom.leftPane.clientWidth);
+                            let rightWidth = Math.floor(dom.rightPane.clientWidth);
+                            let leftHeight, rightHeight;
+
+                            if (isLargeScreen) {
+                                const uniformHeight = Math.max(250, Math.floor(leftWidth * 1.25));
+                                leftHeight = uniformHeight;
+                                rightHeight = uniformHeight;
+                            } else {
+                                leftHeight = Math.floor(leftWidth * 1.25);
+                                rightHeight = Math.floor(rightWidth * 1.2); 
+                            }
+
+                            const leftUrl = `${chartData.left.split('?')[0]}?w=${leftWidth}&h=${leftHeight}`; 
+                            const rightUrl = `${chartData.right.split('?')[0]}?w=${rightWidth}&h=${rightHeight}`; 
+                            dom.leftIframeWrapper.style.height = `${leftHeight}px`; 
+                            dom.rightIframeWrapper.style.height = `${rightHeight}px`; 
+                            dom.leftIframeWrapper.innerHTML = `<iframe src="${leftUrl}" scrolling="no" allowfullscreen></iframe>`; 
+                            dom.rightIframeWrapper.innerHTML = `<iframe src="${rightUrl}" scrolling="no" allowfullscreen></iframe>`; 
+                        });
+                    } 
+                    const debouncedChartResize = debounce(renderAndResizeCharts, 150); 
+                    function updateNavButtons() { if (!isInitialized) return; dom.prevButton.disabled = currentIndex === 0; dom.nextButton.disabled = currentIndex === metricDetails.length - 1; } 
+                    function showChart(index) { 
+                        if (!isInitialized) return; 
+                        currentIndex = index; 
+                        const metricDetail = metricDetails[index]; 
+                        document.querySelectorAll('#statsTabButtons .metric-toggle').forEach(toggle => toggle.classList.add('hidden')); 
+                        document.querySelectorAll("#statsTabButtons .metric-button").forEach((btn) => btn.classList.toggle("active", btn.dataset.index == index)); 
+                        if (metricDetail.isToggle) { 
+                            const activeToggle = document.querySelector(`#statsTabButtons .metric-toggle[data-index="${index}"]`); 
+                            if (activeToggle) { activeToggle.classList.remove('hidden'); activeToggle.querySelector('.median-button').classList.toggle('active', currentMetricType === 'median'); activeToggle.querySelector('.average-button').classList.toggle('active', currentMetricType === 'average'); } 
+                        } 
+                        updateNavButtons(); 
+                        renderAndResizeCharts(); 
+                    } 
+                    function setMetricType(type, reRender = true) { currentMetricType = type; if (reRender) showChart(currentIndex); } 
+                    function populateTabs() { 
+                        if (!isInitialized) return; 
+                        dom.tabButtonsContainer.innerHTML = ''; 
+                        metricDetails.forEach((metric, index) => { 
+                            const itemWrapper = document.createElement('div'); 
+                            itemWrapper.className = 'metric-item-wrapper w-full'; 
+                            const button = document.createElement("button"); 
+                            button.innerText = metric.name; 
+                            button.dataset.index = index; 
+                            button.className = 'metric-button'; 
+                            button.onclick = () => { if (metric.isToggle) setMetricType('median', false); showChart(index); }; 
+                            itemWrapper.appendChild(button); 
+                            if (metric.isToggle) { 
+                                const toggle = document.createElement('div'); 
+                                toggle.className = 'metric-toggle hidden'; 
+                                toggle.dataset.index = index; 
+                                const medianBtn = document.createElement('button'); 
+                                medianBtn.innerText = 'Median'; 
+                                medianBtn.className = 'toggle-button median-button'; 
+                                medianBtn.onclick = () => setMetricType('median'); 
+                                const averageBtn = document.createElement('button'); 
+                                averageBtn.innerText = 'Average'; 
+                                averageBtn.className = 'toggle-button average-button'; 
+                                averageBtn.onclick = () => setMetricType('average'); 
+                                toggle.append(medianBtn, averageBtn); 
+                                itemWrapper.appendChild(toggle); 
+                            } 
+                            dom.tabButtonsContainer.appendChild(itemWrapper); 
+                        }); 
+                    } 
+                    
+                    function setupMenuToggle() {
+                        if (!dom.menuToggle) return;
+                        const toggleIconPath = dom.menuToggle.querySelector('svg path');
+                        const chevronLeftPath = "M15 19l-7-7 7-7";
+                        const chevronRightPath = "M9 5l7 7-7 7";
+
+                        dom.menuToggle.addEventListener('click', () => {
+                            const isCollapsed = dom.menuContainer.classList.contains('lg:w-0');
+                            if (isCollapsed) {
+                                dom.menuContainer.classList.remove('lg:w-0', 'px-0', 'overflow-hidden');
+                                dom.menuContainer.classList.add('lg:w-64');
+                                dom.menuContent.classList.remove('opacity-0', 'max-h-0');
+                                toggleIconPath.setAttribute('d', chevronRightPath);
+                            } else {
+                                dom.menuContainer.classList.remove('lg:w-64');
+                                dom.menuContainer.classList.add('lg:w-0', 'px-0', 'overflow-hidden');
+                                dom.menuContent.classList.add('opacity-0', 'max-h-0');
+                                toggleIconPath.setAttribute('d', chevronLeftPath);
+                            }
+                            setTimeout(() => debouncedChartResize(), 350);
+                        });
+                    }
+
+                    return function(zipId) { 
+                        if (!isInitialized || !document.getElementById('statsLeftPane') || currentZip !== zipId) { 
+                            itemDetailModalElements.statsContent.innerHTML = statsViewerHTML; 
+                            cacheDom(); 
+                            dom.prevButton.addEventListener('click', () => { if (currentIndex > 0) showChart(currentIndex - 1); }); 
+                            dom.nextButton.addEventListener('click', () => { if (currentIndex < metricDetails.length - 1) showChart(currentIndex + 1); }); 
+                            window.addEventListener('resize', debouncedChartResize); 
+                            currentZip = zipId; 
+                            populateTabs(); 
+                            setupMenuToggle();
+                        } 
+                        requestAnimationFrame(() => {
+                            showChart(0);
+                        });
+                    }; 
+                })();
+                // --- END FAITHFUL REPLICATION ---
+
+                function buildMlsAreaUI() {
+                    const mapViewerContainer = document.getElementById('map-viewer-container');
+                    mapViewerContainer.innerHTML = '';
+                    browseByMlsArea.forEach((data, index) => {
+                        const section = document.createElement('div');
+                        section.className = 'bg-white rounded-lg shadow-lg p-4';
+                        const areaIds = data.areas.map(a => a.id);
+                        const rangeText = areaIds.length > 0 ? `${Math.min(...areaIds)}-${Math.max(...areaIds)}` : '';
+                        section.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-4 gap-6"><div class="md:col-span-3 flex flex-col"><div class="text-center flex-grow flex items-center justify-center min-h-[400px] md:min-h-[200px]"><canvas id="map-canvas-${index}" class="w-full"></canvas></div><div class="mt-2 text-center text-sm p-2 border-t"><span class="font-bold">${data.title}: MLS Areas ${rangeText}</span></div></div><div class="flex flex-col"><div id="major-area-header-${index}"></div><div class="p-2 border-b"><h4 class="text-base font-semibold text-gray-700">MLS Areas ${rangeText}</h4><p class="text-xs text-gray-500 mt-1">Click an area to explore.</p></div><div id="area-list-${index}" class="flex-1 p-3 overflow-y-auto custom-scrollbar space-y-1"></div></div></div>`;
+                        mapViewerContainer.appendChild(section);
+                        const majorAreaHeader = document.getElementById(`major-area-header-${index}`);
+                        const priceRangeButtonsHTML = data.priceRanges.map((pr, prIndex) => `<button class="price-range-link w-full text-left text-sm text-blue-600 hover:underline p-1 rounded hover:bg-blue-50" data-major-index="${index}" data-price-index="${prIndex}">${pr.label === '$0-$199k' ? `Under $199k` : pr.label}</button>`).join('');
+                        majorAreaHeader.innerHTML = `<div class="mb-4 pb-4 border-b"><button class="major-title-btn w-full text-left p-2 -m-2 rounded-md hover:bg-gray-50 transition-colors" data-major-index="${index}"><h3 class="font-slab text-2xl font-bold text-gray-800">${data.title}</h3></button><button class="accordion-toggle-btn w-full flex justify-between items-center text-left text-xs text-gray-500 hover:text-sky-600 mt-1 p-1 -m-1 rounded-md transition-colors"><span>Browse by price range</span><svg class="w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button><div class="accordion-content hidden pt-3 mt-2 border-t space-y-2">${priceRangeButtonsHTML}</div></div>`;
+                        majorAreaHeader.querySelector('.major-title-btn').addEventListener('click', (e) => openPriceRangeModal(parseInt(e.currentTarget.dataset.majorIndex), 0));
+                        majorAreaHeader.querySelector('.accordion-toggle-btn').addEventListener('click', (e) => { e.currentTarget.nextElementSibling.classList.toggle('hidden'); e.currentTarget.querySelector('svg').classList.toggle('arrow-rotated'); });
+                        majorAreaHeader.querySelectorAll('.price-range-link').forEach(btn => btn.addEventListener('click', () => openPriceRangeModal(parseInt(btn.dataset.majorIndex), parseInt(btn.dataset.priceIndex))));
+                        const areaListEl = document.getElementById(`area-list-${index}`);
+                        data.areas.forEach(area => {
+                            const areaButton = document.createElement('button');
+                            areaButton.className = 'w-full flex items-baseline p-2 text-left hover:bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-150';
+                            if(area.activeUrl || area.soldUrl){
+                                areaButton.addEventListener('click', () => { const areaIndex = allAreas.findIndex(a => a.id === area.id); if (areaIndex !== -1) openItemDetailModal(areaIndex, 'mls'); });
+                            } else {
+                                areaButton.disabled = true; areaButton.classList.add('opacity-50', 'cursor-not-allowed');
+                            }
+                            areaButton.innerHTML = `<span class="w-12 text-xs font-semibold text-gray-500">${area.id}</span><span class="flex-1 text-sm text-gray-800 font-medium">${area.name}</span>`;
+                            areaListEl.appendChild(areaButton);
+                        });
+                    });
+                    if (!mlsMapsRendered) { 
+                        requestAnimationFrame(() => { 
+                            browseByMlsArea.forEach((data, index) => { 
+                                const canvas = document.getElementById(`map-canvas-${index}`); 
+                                if (canvas && data.pdfUrl) { 
+                                    pdfjsLib.getDocument(data.pdfUrl).promise.then(doc => doc.getPage(1).then(page => {
+                                        const context = canvas.getContext('2d');
+                                        const viewport = page.getViewport({ scale: 1 });
+                                        
+                                        const dpr = window.devicePixelRatio || 1;
+                                        
+                                        const displayWidth = canvas.clientWidth;
+                                        const displayHeight = (displayWidth / viewport.width) * viewport.height;
+
+                                        const scale = (displayWidth * dpr) / viewport.width;
+                                        const scaledViewport = page.getViewport({ scale: scale });
+
+                                        canvas.width = scaledViewport.width;
+                                        canvas.height = scaledViewport.height;
+
+                                        canvas.style.width = `${displayWidth}px`;
+                                        canvas.style.height = `${displayHeight}px`;
+                                        
+                                        page.render({ canvasContext: context, viewport: scaledViewport });
+                                    })); 
+                                }
+                            }); 
+                            mlsMapsRendered = true; 
+                        }); 
+                    }
+                }
+
+                function buildZipCodeUI() {
+                    const zipViewerContainer = document.getElementById('zip-viewer-container');
+                    zipViewerContainer.innerHTML = '';
+                    browseByZip.forEach((county) => {
+                        const section = document.createElement('div');
+                        section.className = 'bg-white rounded-lg shadow p-4 county-section';
+                        section.innerHTML = `<div class="flex flex-col"><h3 class="font-slab text-2xl font-bold text-gray-800 pb-4 border-b mb-4">${county.title}</h3><div class="p-1 zip-list-columns"></div></div>`;
+                        const zipListEl = section.querySelector('.zip-list-columns');
+                        county.zips.forEach(zip => {
+                            const zipButton = document.createElement('button');
+                            zipButton.className = 'zip-item-wrapper w-full flex items-baseline p-2 text-left hover:bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-150';
+                            zipButton.dataset.zip = zip.id;
+                            zipButton.innerHTML = `<span class="w-16 text-xs font-semibold text-gray-500">${zip.id}</span><span class="flex-1 text-sm text-gray-800 font-medium">${zip.name}</span>`;
+                            zipButton.addEventListener('click', () => {
+                                const zipIndex = allZips.findIndex(z => z.id === zip.id);
+                                if (zipIndex !== -1) openItemDetailModal(zipIndex, 'zip');
+                            });
+                            zipListEl.appendChild(zipButton);
+                        });
+                        zipViewerContainer.appendChild(section);
+                    });
+                }
+                
+                buildZipCodeUI();
+                
+                // --- DROPDOWN & TAB LOGIC ---
+                const infoDropdownBtn = document.getElementById('info-dropdown-btn');
+                const infoDropdownPanel = document.getElementById('info-dropdown-panel');
+                const mlsDropdownContent = `<p>You can quickly access active listings and recent sales* in any MLS area by using the URL format: <code class="bg-gray-100 text-sky-700 font-semibold px-1.5 py-0.5 rounded text-xs">travis.realtor/[MLS area]</code></p><p>For example, to explore MLS Area 10 (Sandia Heights), go to <a href="https://www.travis.realtor/10" target="_blank" class="text-sky-600 hover:underline font-semibold"><code class="bg-gray-100 text-sky-700 px-1.5 py-0.5 rounded text-xs">travis.realtor/10</code></a>.</p><p class="inline-flex items-center gap-1.5 flex-wrap"><span>These custom URLs work for all MLS areas in the Southwest MLS market area.</span><span class="relative js-tooltip-container js-main-tooltip inline-flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 hover:text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg><span class="absolute hidden top-full mt-2 left-1/2 -translate-x-1/2 w-[90vw] max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl z-50 p-4 text-left text-xs pointer-events-auto"><span class="absolute sm:hidden w-3 h-3 bg-white border-l border-t border-gray-200" style="top: -7px; right: 1rem; transform: rotate(45deg); z-index: 1;"></span><span class="hidden sm:block absolute w-3 h-3 bg-white border-l border-t border-gray-200" style="top: -7px; left: 50%; transform: translateX(-50%) rotate(45deg); z-index: 1;"></span>The <strong>Southwest MLS (SWMLS) market area</strong> includes Albuquerque, Corrales, Placitas, Rio Rancho, Bernalillo, the East Mountains, and Valencia County.</span></span></p><p class="text-xs pt-2 border-t border-gray-200">*Recent sales include all residential listings within a given MLS area that have been updated to a status of <strong>pending, or closed within 180 days</strong> (about 6 months).</p>`;
+                const zipDropdownContent = `<p>You can quickly access active listings, recent sales* and monthly stats for any ZIP code by using the URL format: <code class="bg-gray-100 text-sky-700 font-semibold px-1.5 py-0.5 rounded text-xs">travis.realtor/[ZIP code]</code></p><p>For example, to explore ZIP code 87144, go to <a href="https://www.travis.realtor/87144" target="_blank" class="text-sky-600 hover:underline font-semibold"><code class="bg-gray-100 text-sky-700 px-1.5 py-0.5 rounded text-xs">travis.realtor/87144</code></a>.</p><p class="inline-flex items-center gap-1.5 flex-wrap"><span>These custom URLs work for all ZIP codes in the Southwest MLS market area.</span><span class="relative js-tooltip-container js-main-tooltip inline-flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 hover:text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg><span class="absolute hidden top-full mt-2 left-1/2 -translate-x-1/2 w-[90vw] max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl z-50 p-4 text-left text-xs pointer-events-auto"><span class="absolute sm:hidden w-3 h-3 bg-white border-l border-t border-gray-200" style="top: -7px; right: 1rem; transform: rotate(45deg); z-index: 1;"></span><span class="hidden sm:block absolute w-3 h-3 bg-white border-l border-t border-gray-200" style="top: -7px; left: 50%; transform: translateX(-50%) rotate(45deg); z-index: 1;"></span>The <strong>Southwest MLS (SWMLS) market area</strong> includes Albuquerque, Corrales, Placitas, Rio Rancho, Bernalillo, the East Mountains, and Valencia County.</span></span></p><p class="text-xs pt-2 border-t border-gray-200">*Recent sales include all residential listings within a given ZIP code that have been updated to a status of <strong>pending, or closed within 180 days</strong> (about 6 months).</p>`;
+                
+                infoDropdownPanel.innerHTML = zipDropdownContent;
+                infoDropdownBtn.addEventListener('click', () => { infoDropdownPanel.classList.toggle('hidden'); infoDropdownBtn.querySelector('svg').classList.toggle('arrow-rotated'); });
+                document.querySelectorAll('.info-dropdown-toggle').forEach(button => { button.addEventListener('click', () => { const panel = button.nextElementSibling; const svg = button.querySelector('svg'); if (panel) panel.classList.toggle('hidden'); if (svg) svg.classList.toggle('arrow-rotated'); }); });
+
+                mlsAreaTab.addEventListener('click', () => {
+                    mlsAreaTab.classList.add('active'); zipCodeTab.classList.remove('active');
+                    mlsAreaContent.classList.remove('hidden'); zipCodeContent.classList.add('hidden');
+                    browseMainTitle.textContent = 'Homes For Sale & Recent Sales by MLS Area';
+                    browseMainSubtitle.textContent = 'Conveniently research your preferred MLS area';
+                    infoDropdownPanel.innerHTML = mlsDropdownContent;
+                    if (!mlsMapsRendered) buildMlsAreaUI();
+                    setupClickTooltips();
+                });
+
+                zipCodeTab.addEventListener('click', () => {
+                    zipCodeTab.classList.add('active'); mlsAreaTab.classList.remove('active');
+                    zipCodeContent.classList.remove('hidden'); 
+                    mlsAreaContent.classList.add('hidden');
+                    browseMainTitle.textContent = 'Homes For Sale & Recent Sales by ZIP Code';
+                    browseMainSubtitle.textContent = 'Conveniently research your preferred ZIP code';
+                    infoDropdownPanel.innerHTML = zipDropdownContent;
+                    setupClickTooltips();
+                });
+
+                zipSearchInput.addEventListener('input', () => {
+                    const query = zipSearchInput.value.toLowerCase().trim(); let visibleCount = 0;
+                    document.querySelectorAll('.zip-item-wrapper').forEach(item => { const zipId = item.dataset.zip; const zipName = item.querySelector('span:last-child').textContent.toLowerCase(); if (zipId.startsWith(query) || zipName.includes(query)) { item.style.display = 'flex'; visibleCount++; } else { item.style.display = 'none'; } });
+                    document.querySelectorAll('.county-section').forEach(section => { const visibleItemsInSection = section.querySelectorAll('.zip-item-wrapper:not([style*="display: none"])'); section.style.display = visibleItemsInSection.length > 0 ? '' : 'none'; });
+                    noResultsMessage.style.display = (visibleCount === 0 && query !== '') ? 'block' : 'none';
+                });
+
+                function setupClickTooltips() {
+                    const triggers = document.querySelectorAll('.js-tooltip-container');
+
+                    triggers.forEach(trigger => {
+                        if (trigger.dataset.tooltipInitialized) return;
+                        trigger.dataset.tooltipInitialized = true;
+
+                        const tooltip = trigger.querySelector('.absolute');
+                        if (!tooltip) return;
+
+                        trigger.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const isVisible = !tooltip.classList.contains('hidden');
+                            
+                            document.querySelectorAll('.js-tooltip-container .absolute').forEach(tt => {
+                                tt.classList.add('hidden');
+                                tt.style.transform = '';
+                            });
+
+                            if (!isVisible) {
+                                tooltip.classList.remove('hidden');
+                                
+                                if (trigger.classList.contains('js-main-tooltip')) {
+                                    requestAnimationFrame(() => {
+                                        const rect = tooltip.getBoundingClientRect();
+                                        const viewportWidth = window.innerWidth;
+                                        const padding = 16;
+                                        let transformStyle = 'translateX(-50%)';
+
+                                        if (rect.right > viewportWidth - padding) {
+                                            const overflowAmount = rect.right - (viewportWidth - padding);
+                                            transformStyle = `translateX(calc(-50% - ${overflowAmount}px))`;
+                                        } else if (rect.left < padding) {
+                                            const overflowAmount = padding - rect.left;
+                                            transformStyle = `translateX(calc(-50% + ${overflowAmount}px))`;
+                                        }
+                                        
+                                        tooltip.style.transform = transformStyle;
+                                    });
+                                }
+                            }
+                        });
+                    });
+                }
+                
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.js-tooltip-container')) {
+                        document.querySelectorAll('.js-tooltip-container .absolute').forEach(tt => {
+                            tt.classList.add('hidden');
+                            tt.style.transform = '';
+                        });
+                    }
+                });
+                
+                setupClickTooltips();
+            }
+            
+            loadData();
+        });
+    </script>
+</body>
+</html>
